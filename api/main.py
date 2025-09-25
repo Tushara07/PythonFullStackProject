@@ -226,6 +226,11 @@ def delete_tracking(tracking_id: str):
         raise HTTPException(status_code=400, detail=result["message"])
     return result
 
+@app.get("/")
+def root():
+    return {"message": "Parcel Tracking API is running "}
+
+
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run("main:app",host="0.0.0.0",port=8000,reload=True)

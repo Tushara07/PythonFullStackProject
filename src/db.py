@@ -14,8 +14,12 @@ key = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 class DatabaseManager:
+    def __init__(self):
+        # db connection setup
+        pass
+
     # ----- Customers -----
-    def add_customer(name, email, phone, address):
+    def add_customer(self,name, email, phone, address):
         """Add customer"""
         data = {
             "customer_id": str(uuid4()),
@@ -26,11 +30,11 @@ class DatabaseManager:
         }
         return supabase.table("customers").insert(data).execute()
 
-    def get_customers():
+    def get_customers(self):
         """Get customers"""
         return supabase.table("customers").select("*").execute().data
 
-    def update_customer(customer_id, name=None, email=None, phone=None, address=None):
+    def update_customer(self,customer_id, name=None, email=None, phone=None, address=None):
         """Update customer"""
         data = {}
         if name: data["name"] = name
@@ -39,13 +43,13 @@ class DatabaseManager:
         if address: data["address"] = address
         return supabase.table("customers").update(data).eq("customer_id", customer_id).execute()
 
-    def delete_customer(customer_id):
+    def delete_customer(self,customer_id):
         """Delete customer"""
         return supabase.table("customers").delete().eq("customer_id", customer_id).execute()
 
 
     # ----- Couriers -----
-    def add_courier(name, phone, vehicle_no):
+    def add_courier(self,name, phone, vehicle_no):
         """Add courier"""
         data = {
             "courier_id": str(uuid4()),
@@ -55,11 +59,11 @@ class DatabaseManager:
         }
         return supabase.table("couriers").insert(data).execute()
 
-    def get_couriers():
+    def get_couriers(self):
         """Get couriers"""
         return supabase.table("couriers").select("*").execute().data
 
-    def update_courier(courier_id, name=None, phone=None, vehicle_no=None):
+    def update_courier(self,courier_id, name=None, phone=None, vehicle_no=None):
         """Update courier"""
         data = {}
         if name: data["name"] = name
@@ -67,13 +71,13 @@ class DatabaseManager:
         if vehicle_no: data["vehicle_no"] = vehicle_no
         return supabase.table("couriers").update(data).eq("courier_id", courier_id).execute()
 
-    def delete_courier(courier_id):
+    def delete_courier(self,courier_id):
         """Delete courier"""
         return supabase.table("couriers").delete().eq("courier_id", courier_id).execute()
 
 
     # ----- Parcels -----
-    def add_parcel(sender_id, receiver_id, weight, price, status="Pending"):
+    def add_parcel(self,sender_id, receiver_id, weight, price, status="Pending"):
         """Add parcel"""
         data = {
             "parcel_id": str(uuid4()),
@@ -86,11 +90,11 @@ class DatabaseManager:
         }
         return supabase.table("parcels").insert(data).execute()
 
-    def get_parcels():
+    def get_parcels(self):
         """Get parcels"""
         return supabase.table("parcels").select("*").execute().data
 
-    def update_parcel(parcel_id, status=None, weight=None, price=None):
+    def update_parcel(self,parcel_id, status=None, weight=None, price=None):
         """Update parcel"""
         data = {}
         if status: data["status"] = status
@@ -98,13 +102,13 @@ class DatabaseManager:
         if price: data["price"] = price
         return supabase.table("parcels").update(data).eq("parcel_id", parcel_id).execute()
 
-    def delete_parcel(parcel_id):
+    def delete_parcel(self,parcel_id):
         """Delete parcel"""
         return supabase.table("parcels").delete().eq("parcel_id", parcel_id).execute()
 
 
     # ----- Tracking -----
-    def add_tracking(parcel_id, courier_id, location, remarks=""):
+    def add_tracking(self,parcel_id, courier_id, location, remarks=""):
         """Add tracking"""
         data = {
             "tracking_id": str(uuid4()),
@@ -116,18 +120,18 @@ class DatabaseManager:
         }
         return supabase.table("tracking").insert(data).execute()
 
-    def get_tracking(parcel_id):
+    def get_tracking(self,parcel_id):
         """Get parcel tracking"""
         return supabase.table("tracking").select("*").eq("parcel_id", parcel_id).execute().data
 
-    def update_tracking(tracking_id, location=None, remarks=None):
+    def update_tracking(self,tracking_id, location=None, remarks=None):
         """Update tracking"""
         data = {}
         if location: data["location"] = location
         if remarks: data["remarks"] = remarks
         return supabase.table("tracking").update(data).eq("tracking_id", tracking_id).execute()
 
-    def delete_tracking(tracking_id):
+    def delete_tracking(self,tracking_id):
         """Delete tracking"""
         return supabase.table("tracking").delete().eq("tracking_id", tracking_id).execute()
 
