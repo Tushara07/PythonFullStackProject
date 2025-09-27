@@ -1,4 +1,3 @@
-#db_manager.py
 import os
 from supabase import create_client, Client
 from dotenv import load_dotenv
@@ -14,7 +13,6 @@ supabase: Client = create_client(url, key)
 
 class DatabaseManager:
     def __init__(self):
-        # db connection setup
         pass
 
     # ----- Customers -----

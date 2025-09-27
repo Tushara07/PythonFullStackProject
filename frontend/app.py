@@ -36,11 +36,11 @@ with header_cols[5]:
 
 st.markdown("---")
 
-# ---- Page Background & Card Styling & Button Styling ----
+# ---- Page Background & Button Styling ----
 st.markdown(
     """
     <style>
-    /* Entire app background */
+    /* Entire page background */
     .stApp {
         background-color: #D1D1EB;
     }
@@ -48,17 +48,17 @@ st.markdown(
 
     /* Streamlit buttons styling */
     div.stButton > button {
-        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);    /* subtle shadow */
-        padding: 0.35em 0.75em;                        /* preserve default padding */
-        font-weight: 500;                              /* slightly bold */
-        transition: all 0.2s ease;                     /* smooth hover effect */
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);    
+        padding: 0.35em 0.75em;                        
+        font-weight: 500;                              
+        transition: all 0.2s ease;                     
     }
 
     div.stButton > button:hover {
         box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
         background-color: #38506E;                     /* hover color */
         color: white;
-        transform: translateY(-1px);                   /* subtle lift on hover */
+        transform: translateY(-1px);                   /* lift on hover */
     }
     </style>
     """,
@@ -69,9 +69,7 @@ st.markdown(
 # ---------------- Home Page ----------------
 if st.session_state.page == "Home":
     st.markdown("<h1 style='text-align: center;text-shadow: 1px 1.5px 2px rgba(0,0,0,0.4);'>📦 Parcel Tracking System</h1>", unsafe_allow_html=True)
-    # Home page title
     
-
     st.write(" ")
 
     left_col, right_col = st.columns([2, 1])  # Left for operations, right for stats

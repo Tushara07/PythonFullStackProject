@@ -1,5 +1,4 @@
 #Frontend ----> API -----> logic ------> db ------> Response
-#api/main.py
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,7 +19,7 @@ app = FastAPI(title="Parcel management API", version="1.0")
 # Allow CORS (for frontend calls)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # You can restrict to your frontend domain
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

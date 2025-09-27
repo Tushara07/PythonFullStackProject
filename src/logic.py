@@ -1,4 +1,3 @@
-# src_logic.py
 from src.db import DatabaseManager
 
 '''Acts as a bridge between frontend (streamlit/FastAPI) and the database'''
