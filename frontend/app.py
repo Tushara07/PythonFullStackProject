@@ -36,9 +36,42 @@ with header_cols[5]:
 
 st.markdown("---")
 
+# ---- Page Background & Card Styling & Button Styling ----
+st.markdown(
+    """
+    <style>
+    /* Entire app background */
+    .stApp {
+        background-color: #D1D1EB;
+    }
+
+
+    /* Streamlit buttons styling */
+    div.stButton > button {
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);    /* subtle shadow */
+        padding: 0.35em 0.75em;                        /* preserve default padding */
+        font-weight: 500;                              /* slightly bold */
+        transition: all 0.2s ease;                     /* smooth hover effect */
+    }
+
+    div.stButton > button:hover {
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+        background-color: #38506E;                     /* hover color */
+        color: white;
+        transform: translateY(-1px);                   /* subtle lift on hover */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 # ---------------- Home Page ----------------
 if st.session_state.page == "Home":
-    st.markdown("<h1 style='text-align: center;'>📦 Parcel Tracking System</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;text-shadow: 1px 1.5px 2px rgba(0,0,0,0.4);'>📦 Parcel Tracking System</h1>", unsafe_allow_html=True)
+    # Home page title
+    
+
     st.write(" ")
 
     left_col, right_col = st.columns([2, 1])  # Left for operations, right for stats
@@ -89,6 +122,8 @@ if st.session_state.page == "Home":
         st.metric("Total Parcels", total_parcels)
         st.metric("Parcels In Transit", in_transit)
         st.metric("Parcels Delivered", delivered)
+    
+    
 
 
 # ---------------- Customers Page ----------------
@@ -293,3 +328,9 @@ elif st.session_state.page == "Tracking":
                 st.success(result["message"])
             else:
                 st.error(result["message"])
+
+st.markdown(
+    "<div style='text-align: center; padding: 10px; color: #555;'>© 2025 Parcel Tracking System</div>",
+    unsafe_allow_html=True
+)
+
