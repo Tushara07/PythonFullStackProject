@@ -117,6 +117,8 @@ elif st.session_state.page == "Customers":
 
     elif action == "Update":
         cust_id = st.text_input("Customer ID")
+        if cust_id:
+            cust_id = int(cust_id)  # <-- convert to int
         name = st.text_input("New Name")
         email = st.text_input("New Email")
         phone = st.text_input("New Phone")
@@ -130,6 +132,8 @@ elif st.session_state.page == "Customers":
 
     elif action == "Delete":
         cust_id = st.text_input("Customer ID")
+        if cust_id:
+            cust_id = int(cust_id)  # <-- convert to int
         if st.button("Delete Customer"):
             result = customer_mgr.delete(cust_id)
             if result["success"]:
@@ -162,6 +166,8 @@ elif st.session_state.page == "Couriers":
 
     elif action == "Update":
         courier_id = st.text_input("Courier ID")
+        if courier_id:
+            courier_id = int(courier_id)  # <-- convert to int
         name = st.text_input("New Name")
         phone = st.text_input("New Phone")
         vehicle = st.text_input("New Vehicle No.")
@@ -174,6 +180,8 @@ elif st.session_state.page == "Couriers":
 
     elif action == "Delete":
         courier_id = st.text_input("Courier ID")
+        if courier_id:
+            courier_id = int(courier_id)  # <-- convert to int
         if st.button("Delete Courier"):
             result = courier_mgr.delete(courier_id)
             if result["success"]:
@@ -189,6 +197,9 @@ elif st.session_state.page == "Parcels":
     if action == "Add":
         sender_id = st.text_input("Sender ID")
         receiver_id = st.text_input("Receiver ID")
+        if sender_id and receiver_id:
+            sender_id = int(sender_id)  # <-- convert to int
+            receiver_id = int(receiver_id)
         weight = st.number_input("Weight (kg)", min_value=0.1)
         price = st.number_input("Price", min_value=1)
         if st.button("Save Parcel"):
@@ -207,6 +218,8 @@ elif st.session_state.page == "Parcels":
 
     elif action == "Update":
         parcel_id = st.text_input("Parcel ID")
+        if parcel_id:
+            parcel_id = int(parcel_id)  # <-- convert to int
         status = st.selectbox("Status", ["Pending", "In Transit", "Delivered"])
         if st.button("Update Parcel"):
             result = parcel_mgr.update(parcel_id, status=status)
@@ -217,6 +230,8 @@ elif st.session_state.page == "Parcels":
 
     elif action == "Delete":
         parcel_id = st.text_input("Parcel ID")
+        if parcel_id:
+            parcel_id = int(parcel_id)  # <-- convert to int
         if st.button("Delete Parcel"):
             result = parcel_mgr.delete(parcel_id)
             if result["success"]:
@@ -232,6 +247,9 @@ elif st.session_state.page == "Tracking":
     if action == "Add Tracking Update":
         parcel_id = st.text_input("Parcel ID")
         courier_id = st.text_input("Courier ID")
+        if parcel_id and courier_id:
+            parcel_id = int(parcel_id)  # <-- convert to int
+            courier_id = int(courier_id)
         location = st.text_input("Location")
         remarks = st.text_area("Remarks")
         if st.button("Save Tracking"):
@@ -243,6 +261,8 @@ elif st.session_state.page == "Tracking":
 
     elif action == "View by Parcel":
         parcel_id = st.text_input("Parcel ID")
+        if parcel_id:
+            parcel_id = int(parcel_id)  # <-- convert to int
         if st.button("View Tracking"):
             result = tracking_mgr.get_by_parcel(parcel_id)
             if result["success"]:
@@ -252,6 +272,8 @@ elif st.session_state.page == "Tracking":
 
     elif action == "Update Tracking":
         track_id = st.text_input("Tracking ID")
+        if track_id:
+            track_id = int(track_id)  # <-- convert to int
         location = st.text_input("New Location")
         remarks = st.text_area("New Remarks")
         if st.button("Update Tracking"):
@@ -263,6 +285,8 @@ elif st.session_state.page == "Tracking":
 
     elif action == "Delete Tracking":
         track_id = st.text_input("Tracking ID")
+        if track_id:
+            track_id = int(track_id)  # <-- convert to int
         if st.button("Delete Tracking"):
             result = tracking_mgr.delete(track_id)
             if result["success"]:

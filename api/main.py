@@ -41,7 +41,7 @@ class CustomerUpdate(BaseModel):
     address: Optional[str] = None
 
 class CustomerResponse(BaseModel):
-    customer_id: str
+    customer_id: int
     name: str
     email: str
     phone: str
@@ -59,30 +59,30 @@ class CourierUpdate(BaseModel):
     vehicle_no: Optional[str] = None
 
 class CourierResponse(BaseModel):
-    courier_id: str
+    courier_id: int
     name: str
     phone: str
     vehicle_no: str
 
 # ------------------ Parcel Models ------------------
 class ParcelCreate(BaseModel):
-    sender_id: str
-    receiver_id: str
+    sender_id: int
+    receiver_id: int
     weight: float
     price: float
     status: str = "Pending"
 
 class ParcelUpdate(BaseModel):
-    sender_id: Optional[str] = None
-    receiver_id: Optional[str] = None
+    sender_id: Optional[int] = None
+    receiver_id: Optional[int] = None
     weight: Optional[float] = None
     price: Optional[float] = None
     status: Optional[str] = None
 
 class ParcelResponse(BaseModel):
-    parcel_id: str
-    sender_id: str
-    receiver_id: str
+    parcel_id: int
+    sender_id: int
+    receiver_id: int
     weight: float
     price: float
     status: str
@@ -90,21 +90,21 @@ class ParcelResponse(BaseModel):
 
 # ------------------ Tracking Models ------------------
 class TrackingCreate(BaseModel):
-    parcel_id: str
-    courier_id: str
+    parcel_id: int
+    courier_id: int
     location: str
     remarks: str = ""
 
 class TrackingUpdate(BaseModel):
-    parcel_id: Optional[str] = None
-    courier_id: Optional[str] = None
+    parcel_id: Optional[int] = None
+    courier_id: Optional[int] = None
     location: Optional[str] = None
     remarks: Optional[str] = None
 
 class TrackingResponse(BaseModel):
-    tracking_id: str
-    parcel_id: str
-    courier_id: str
+    tracking_id: int
+    parcel_id: int
+    courier_id: int
     location: str
     remarks: str
     timestamp: str
@@ -126,14 +126,14 @@ def get_customers():
     return result
 
 @app.put("/customers/{customer_id}")
-def update_customer(customer_id: str, customer: CustomerUpdate):
+def update_customer(customer_id: int, customer: CustomerUpdate):
     result = customer_manager.update(customer_id, **customer.model_dump(exclude_unset=True))
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result["message"])
     return result
 
 @app.delete("/customers/{customer_id}")
-def delete_customer(customer_id: str):
+def delete_customer(customer_id: int):
     result = customer_manager.delete(customer_id)
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result["message"])
@@ -155,14 +155,14 @@ def get_couriers():
     return result
 
 @app.put("/couriers/{courier_id}")
-def update_courier(courier_id: str, courier: CourierUpdate):
+def update_courier(courier_id: int, courier: CourierUpdate):
     result = courier_manager.update(courier_id, **courier.model_dump(exclude_unset=True))
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result["message"])
     return result
 
 @app.delete("/couriers/{courier_id}")
-def delete_courier(courier_id: str):
+def delete_courier(courier_id: int):
     result = courier_manager.delete(courier_id)
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result["message"])
@@ -184,14 +184,14 @@ def get_parcels():
     return result
 
 @app.put("/parcels/{parcel_id}")
-def update_parcel(parcel_id: str, parcel: ParcelUpdate):
+def update_parcel(parcel_id: int, parcel: ParcelUpdate):
     result = parcel_manager.update(parcel_id, **parcel.model_dump(exclude_unset=True))
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result["message"])
     return result
 
 @app.delete("/parcels/{parcel_id}")
-def delete_parcel(parcel_id: str):
+def delete_parcel(parcel_id: int):
     result = parcel_manager.delete(parcel_id)
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result["message"])
@@ -206,21 +206,21 @@ def create_tracking(tracking: TrackingCreate):
     return result
 
 @app.get("/tracking/{parcel_id}")
-def get_tracking(parcel_id: str):
+def get_tracking(parcel_id: int):
     result = tracking_manager.get_by_parcel(parcel_id)
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result["message"])
     return result
 
 @app.put("/tracking/{tracking_id}")
-def update_tracking(tracking_id: str, tracking: TrackingUpdate):
+def update_tracking(tracking_id: int, tracking: TrackingUpdate):
     result = tracking_manager.update(tracking_id, **tracking.model_dump(exclude_unset=True))
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result["message"])
     return result
 
 @app.delete("/tracking/{tracking_id}")
-def delete_tracking(tracking_id: str):
+def delete_tracking(tracking_id: int):
     result = tracking_manager.delete(tracking_id)
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result["message"])
