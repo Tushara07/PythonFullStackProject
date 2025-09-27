@@ -1,6 +1,6 @@
 # Parcel/Courier Tracking System
 
-The Parcel/Courier Tracking System simplifies parcel management and tracking for courier services. Customers can register parcels with sender and receiver details and track them using a unique ID. Couriers update parcel status and location at each checkpoint. Built with Python (backend) and Supabase (database), the system ensures efficient data handling and scalability. A simple web frontend (React/HTML-CSS) allows easy interaction, showcasing skills in Python, SQL, database design, and API integration.
+The Parcel/Courier Tracking System simplifies parcel management and tracking for courier services. Customers can register parcels with sender and receiver details and track them using a unique ID. Couriers update parcel status and location at each checkpoint. Built with Python (backend) and Supabase (database), the system ensures efficient data handling and scalability. A simple web frontend (Streamlit) allows easy interaction, showcasing skills in Python, SQL, database design, and API integration.
 
 # Features
 
@@ -51,14 +51,14 @@ ParcelCourier Tracking System/
 
 ### 1. Clone or Download the project
 
-# Option 1: Clone with Git
+#### Option 1: Clone with Git
 git clone <repository-url>
 
-# Option 2: Download and extract the ZIP file
+#### Option 2: Download and extract the ZIP file
 
 ### 2. Install Dependencies
 
-# Install all required Python packages
+#### Install all required Python packages
 pip install -r requirements.txt
 
 ### 3. Set up Supabase Project:
@@ -72,7 +72,7 @@ pip install -r requirements.txt
 
     -- 1. Customers Table
     CREATE TABLE customers (
-        customer_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        customer_id BIGSERIAL PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         email VARCHAR(100) UNIQUE NOT NULL,
         phone VARCHAR(15) NOT NULL,
@@ -81,17 +81,17 @@ pip install -r requirements.txt
 
     -- 2. Couriers Table
     CREATE TABLE couriers (
-        courier_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        courier_id BIGSERIAL PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
-        phone VARCHAR(15) NOT NULL,
-        vehicle_no VARCHAR(20) NOT NULL
+        phone VARCHAR(15) UNIQUE NOT NULL,
+        vehicle_no VARCHAR(50)
     );
 
     -- 3. Parcels Table
     CREATE TABLE parcels (
-        parcel_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-        sender_id UUID REFERENCES customers(customer_id) ON DELETE CASCADE,
-        receiver_id UUID REFERENCES customers(customer_id) ON DELETE CASCADE,
+        parcel_id BIGSERIAL PRIMARY KEY,
+        sender_id BIGINT REFERENCES customers(customer_id) ON DELETE CASCADE,
+        receiver_id BIGINT REFERENCES customers(customer_id) ON DELETE CASCADE,
         weight DECIMAL(10,2) NOT NULL,
         price DECIMAL(10,2) NOT NULL,
         status VARCHAR(20) NOT NULL CHECK (status IN ('Pending', 'In Transit', 'Delivered', 'Cancelled')),
@@ -100,9 +100,9 @@ pip install -r requirements.txt
 
     -- 4. Tracking Table
     CREATE TABLE tracking (
-        tracking_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-        parcel_id UUID REFERENCES parcels(parcel_id) ON DELETE CASCADE,
-        courier_id UUID REFERENCES couriers(courier_id) ON DELETE SET NULL,
+        tracking_id BIGSERIAL PRIMARY KEY,
+        parcel_id BIGINT REFERENCES parcels(parcel_id) ON DELETE CASCADE,
+        courier_id BIGINT REFERENCES couriers(courier_id) ON DELETE SET NULL,
         location VARCHAR(100) NOT NULL,
         timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         remarks TEXT
@@ -120,18 +120,18 @@ SUPABASE_KEY= "your_anonymous_key"
 
 ### 5. Run the Application
 
-## Streamlit Frontend
+#### Streamlit Frontend
 streamlit run frontend/app.py
 
-- The app will open in your browser at `http://localhost:8000`
+- The app will open in your browser at `http://localhost:8501`
 
-## FastAPI Backend
+#### FastAPI Backend
 cd api
 python main.py
 
 - The API will be available as `http://localhost:8080`
 
-## How to use
+### How to use
 
 1. Register Parcel – Customer enters sender and receiver details, weight, and price. A tracking ID is generated.
 
@@ -152,11 +152,9 @@ Python Libraries:
 
     - Supabase-py – Database operations with Supabase
 
-    - UUID – Generate unique IDs for parcels, customers, and couriers
-
     - Datetime – Manage timestamps for tracking updates
 
-### Technologies Used
+## Technologies Used
 
     - Database (DB): Supabase (PostgreSQL)
 
@@ -164,7 +162,7 @@ Python Libraries:
 
 	- Frontend: Streamlit (Python web framework)
 
-	- Tools: VS Code, Supabase Console, Postman/Thunder Client
+	- Tools: VS Code, Supabase Console
 
     - Language: Python 3.8+
 
@@ -203,6 +201,18 @@ Python Libraries:
     - Make sure you've installed all dependencies :
         `pip install -r requirements.txt`
     - Check that you're running commands from correct directory
+    
+2. "Invalid BIGINT errors"
+
+    - Ensure parcel_id, sender_id, receiver_id, and courier_id are integers
+
+3. "Input errors in forms"
+
+    - Validate user inputs and use try-except to handle unexpected values
+
+4. "Database connection issues"
+
+    - Verify .env contains correct SUPABASE_URL and SUPABASE_KEY
 
 ## Future Enhancements
 
@@ -221,8 +231,9 @@ Ideas for extending this project:
 ## Support
 
 If you encounter any issues or have questions :
-Mobile : 8686457339
-Email : tusharakatamreddy@gmail.com
+
+- Mobile : 8686457339
+- Email : tusharakatamreddy@gmail.com
 
 
 
