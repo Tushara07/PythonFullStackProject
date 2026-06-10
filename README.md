@@ -228,12 +228,7 @@ Ideas for extending this project:
 
 5. Mobile App Interface – Develop a mobile-friendly version for customers and couriers to track and update parcels on the go.
 
-## Support
 
-If you encounter any issues or have questions :
-
-- Mobile : 8686457339
-- Email : tusharakatamreddy@gmail.com
 
 
 
