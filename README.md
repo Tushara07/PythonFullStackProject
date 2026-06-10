@@ -20,25 +20,9 @@ The Parcel/Courier Tracking System simplifies parcel management and tracking for
 
 8.Data Management – Efficient CRUD operations for managing all records.
 
-# Project Structure
+## Project Structure
 
-ParcelCourier Tracking System/
-|
-|----src/               # core application logic
-|   |---logic.py        # Business logic and task operations
-|   |---db.py           # Database operation
-|
-|----api/               # Backend API
-|   |---main.py         # FastAPI endpoints
-|
-|----frontend/          # Frontend applications
-|   |---app.py          # Streamlit web interface
-|
-|----requirements.txt   # Python dependencies
-|
-|----README.md          # Project Documentation
-|
-|----.env               # Python Environment Variables 
+ParcelCourier Tracking System/ | |----src/ # core application logic | |---logic.py # Business logic and task operations | |---db.py # Database operation | |----api/ # Backend API | |---main.py # FastAPI endpoints | |----frontend/ # Frontend applications | |---app.py # Streamlit web interface | |----requirements.txt # Python dependencies | |----README.md # Project Documentation | |----.env # Python Environment Variables
 
 
 # Quick Start
